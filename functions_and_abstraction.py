@@ -1,57 +1,59 @@
-def opciones():
-  print(f'Opciones para hallar raiz cuadrada \n (1) Enumeracion exhaustiva \n (2) Aproximacion de soluciones \n (3) Busqueda binaria') 
-  opcion = int(input('Elija una opcion: '))
-  numero = int(input('Elija un numero: '))
-  if opcion==1:
-    Enumeracion(numero)
-  elif opcion==2:
-    Aproximacion(numero)
-  elif opcion==3:
-    BusquedaBinaria(numero)
-  else:
-    print('Elija 1, 2 o 3')
-
-def Enumeracion(objetivo):
-  respuesta = 0
-
-  while respuesta**2 < objetivo:
-      print(respuesta)
-      respuesta += 1
-
-  if respuesta**2 == objetivo:
-      print(f'La raiz cuadrada de {objetivo} es {respuesta}')
-  else:
-      print(f'{objetivo} no tiene una raiz cuadrada exacta')
-
-def Aproximacion(objetivo):
-  epsilon = 0.001
-  paso = epsilon**2 
-  respuesta = 0.0
-
-  while abs(respuesta**2 - objetivo) >= epsilon and respuesta <= objetivo:
-      #print(abs(respuesta**2 - objetivo), respuesta)
-      respuesta += paso
-
-  if abs(respuesta**2 - objetivo) >= epsilon:
-      print(f'No se encontro la raiz cuadrada {objetivo}')
-  else:
-      print(f'La raiz cudrada de {objetivo} es {respuesta}')
+objetivo = int(input('Escoge un numero: '))
+print('Porque metodo te gustaria encontrar la raiz cuadara?:')
+print('1. Enumeracion exhaustiva.')
+print('2. Aproximacion')
+print('3. Busqueda Binaria')
+opcion = int(input('Escribe el numero de la opcion que deseas: '))
 
 
-def  BusquedaBinaria(objetivo):
-  epsilon = 0.001
-  bajo = 0.0
-  alto = max(1.0, objetivo)
-  respuesta = (alto + bajo) / 2
+def enumeracion_exhaustiva(objetivo):
+    respuesta = 0
 
-  while abs(respuesta**2 - objetivo) >= epsilon:
-      print(f'bajo={bajo}, alto={alto}, respuesta={respuesta}')
-      if respuesta**2 < objetivo:
-          bajo = respuesta
-      else:
-          alto = respuesta
+    while respuesta**2 < objetivo:
+        respuesta += 1
 
-      respuesta = (alto + bajo) / 2
-  print(f'La raiz cuadrada de {objetivo} es {respuesta}')
+    if respuesta**2 == objetivo:
+        return print(f'La raiz cuadrada de {objetivo} es {respuesta}')
+    else:
+        return print(f'{objetivo} no tiene una raiz cuadrada exacta')
 
-opciones()
+
+def aproximacion(objetivo):
+    epsilon = 0.01
+    paso = epsilon**2
+    respuesta = 0.0
+
+    while abs(respuesta**2 - objetivo) >= epsilon and respuesta <= objetivo:
+        respuesta += paso
+
+    if abs(respuesta**2 - objetivo) >= epsilon:
+        return print(f'No se encontro la raiz cuadrada de {objetivo}')
+    else:
+        return print(f'La raiz cuadrada de {objetivo} es {respuesta}')
+
+
+def busqueda_binaria(objetivo):
+    epsilon = 0.001
+    bajo = 0.0
+    alto = max(1.0, objetivo)
+    respuesta = (alto + bajo) / 2
+
+    while abs(respuesta**2 - objetivo) >= epsilon:
+        if respuesta**2 < objetivo:
+            bajo = respuesta
+        else:
+            alto = respuesta
+        respuesta = (alto + bajo) / 2
+
+    return print(f'La raiz cuadrada de {objetivo} es {respuesta}')
+
+
+if opcion == 1:
+    enumeracion_exhaustiva(objetivo)
+elif opcion == 2:
+    aproximacion(objetivo)
+elif opcion == 3:
+    busqueda_binaria(objetivo)
+else:
+    print('Opcion no valida.')
+
