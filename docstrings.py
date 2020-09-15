@@ -10,3 +10,4 @@ def suma(a, b):
 
 
 print(suma(2, 4))
+help(suma)
